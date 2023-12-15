@@ -1,4 +1,4 @@
-# Dynamic Webapp - CMT120 Assignment 2
+# Dynamic Webapp 
 
 This is a repo for the second CMT120 Assignment to design and implement a dynamic website/app
 
