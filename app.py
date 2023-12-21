@@ -21,7 +21,7 @@ def projects():
             'description': 'Description of Project 2.',
             'image': 'static/project2.jpg'
         },
-        # Add more projects as needed
+        
     ]
     return render_template('projects.html', projects=projects_data)
 
