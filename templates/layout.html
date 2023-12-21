@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}My Projects{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>My Project Showcase</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+        </nav>
+    </header>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        &copy; 2023 My Project Showcase
+    </footer>
+</body>
+</html>
+
