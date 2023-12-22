@@ -10,13 +10,13 @@
     <br>
     <div>
         <h3>Find what you're looking for using our filtered search</h3>
-        <form id="filterForm" action="filter" method="POST" onsubmit="return loadItems()">
+        <form id="filterForm" onsubmit="return loadItems()">
             <label>Category:</label>
             <br>
-                <label>Rock Shoes<input type ="checkbox"></label>
-                <label>Ropes<input type ="checkbox"></label>
-                <label>Harnesses<input type ="checkbox"></label>
-                <label>Quickdraws<input type ="checkbox"></label>
+                <label>Rock Shoes<input type ="checkbox" value="Rock_shoe" class="category"></label>
+                <label>Ropes<input type ="checkbox" value="Rope" class="category"></label>
+                <label>Harnesses<input type ="checkbox" value="Harness" class="category"></label>
+                <label>Quickdraws<input type ="checkbox" value="Quickdraws" class="category"></label>
             <br>
             <label>Price:</label>
             <br>
@@ -25,7 +25,33 @@
             <br>
             <button type="submit">Search</button>
         </form>
+        <span id="txt">result goes here</span>
     </div>
     
-
+    <script>
+        function loadItems() {
+        var checked = document.querySelectorAll('input[class="category"]:checked');
+        console.log(checked);
+        var categories = [];
+        for (let i = 0; i < checked.length; i++){
+            categories.push(checked[i].value);
+        }
+        var minPrice = document.forms["filterForm"]["minPrice"].value;
+        var maxPrice = document.forms["filterForm"]["maxPrice"].value;
+        params = 'categories='+categories+'&minPrice='+minPrice+'&maxPrice='+maxPrice;
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", '/searchItems', true); // true is asynchronous
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState === 4 && xhttp.status === 200) {
+            console.log(xhttp.responseText);
+            document.getElementById("txt").innerHTML = xhttp.responseText;
+          } else {
+            console.error(xhttp.statusText);
+          }
+        };
+        xhttp.send(params);
+        return false;
+    }
+    </script>
 {% endblock %}
