@@ -1,0 +1,13 @@
+{%extends "layout.html"%}
+
+{%block content%}
+{% for row in productlist %}
+<div class="product">
+    <div style ="border: 1px solid grey; border-radius: 5px; padding: 16px; margin-bottom: 16px; height: 300px;">
+        <img src="static/images/{{row.image}}" alt="row.name" class="img-responsive" >
+        <p align="center"><strong><a href="#">{{row.product_name}}</a></strong></p>
+        <h4 style="text-align: center;" class="text-danger">{{row.price}}</h4>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
