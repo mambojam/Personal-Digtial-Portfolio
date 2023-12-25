@@ -13,10 +13,10 @@
         <form id="filterForm" onsubmit="loadItems(); return false;">
             <label>Category:</label>
             <br>
-                <label>Rock Shoes<input type ="checkbox" value="Rock_shoe" class="category"></label>
+                <label>Rock Shoes<input type ="checkbox" value="Rock_Shoe" class="category"></label>
                 <label>Ropes<input type ="checkbox" value="Rope" class="category"></label>
                 <label>Harnesses<input type ="checkbox" value="Harness" class="category"></label>
-                <label>Quickdraws<input type ="checkbox" value="Quickdraws" class="category"></label>
+                <label>Quickdraws<input type ="checkbox" value="Quickdraw" class="category"></label>
             <br>
             <label>Price:</label>
             <br>
@@ -36,13 +36,20 @@
         var minPrice = document.forms["filterForm"]["minPrice"].value;
         var maxPrice = document.forms["filterForm"]["maxPrice"].value;
         
-        var params = 'categories=' + JSON.stringify(categories) + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice;        var xhttp = new XMLHttpRequest();
+        var params = 'categories=' + JSON.stringify(categories) + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice;        
+        var xhttp = new XMLHttpRequest();
         xhttp.open("POST", '/searchItems', true); // true is asynchronous
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState === 4 && xhttp.status === 200) {
-            console.log(xhttp.responseText);
-            document.getElementById("txt").innerHTML = xhttp.responseText;
+            let  rawContent = JSON.parse(xhttp.responseText);
+            for (let item = 0; item < rawContent.length; item++) {
+                let gallery = document.getElementById("txt");
+                let display = document.createElement("p");
+                display.innerHTML += rawContent[item][1] + " " + rawContent[item][3];
+                gallery.appendChild(display);
+            }
+            // document.getElementById("txt").innerHTML = xhttp.responseText;
           } else {
             console.error(xhttp.statusText);
           }
