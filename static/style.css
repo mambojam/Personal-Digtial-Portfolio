@@ -27,8 +27,8 @@ nav a {
 }
 
 .content {
-    max-width: 800px;
-    margin: 20px auto;
+    max-width: 80vw;
+    margin: auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -78,3 +78,24 @@ nav.shop a {
     text-decoration: none;
 }
 
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: grey;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    padding: 0px;
+    margin: 0px auto;
+}
+
+#gallery div {
+    background-color: orange;
+    min-width: 250px;
+    max-width: 75vw;
+    min-height: 300px;
+    max-height: 75vh;
+    margin: 1.5vw;
+    text-align: center;
+    line-height: 2vw;
+    font-size: 2vh;
+}

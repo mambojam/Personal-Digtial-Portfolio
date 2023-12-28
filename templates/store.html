@@ -25,28 +25,50 @@
             <br>
             <button type="submit">Search</button>
         </form>
-        <span id="txt">result goes here</span>
+        
+    </div>
+    <h2>Results</h2>
+    <div id="gallery">
+        
     </div>
     
     <script>
         function loadItems() {
         var checked = document.querySelectorAll('input[class="category"]:checked');
         var categories = Array.from(checked).map(input => input.value);
-
+        if (categories.length === 0) {
+            allCats = document.querySelectorAll('input[class="category"]');
+            categories = Array.from(allCats).map(input => input.value);
+        }
         var minPrice = document.forms["filterForm"]["minPrice"].value;
+        if (minPrice === "") {
+            minPrice = "0";
+        }
         var maxPrice = document.forms["filterForm"]["maxPrice"].value;
-        
+        if (maxPrice === "") {
+            maxPrice = "10000";
+        }
+
         var params = 'categories=' + JSON.stringify(categories) + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice;        
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", '/searchItems', true); // true is asynchronous
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState === 4 && xhttp.status === 200) {
-            let  rawContent = JSON.parse(xhttp.responseText);
-            for (let item = 0; item < rawContent.length; item++) {
-                let gallery = document.getElementById("txt");
-                let display = document.createElement("p");
-                display.innerHTML += rawContent[item][1] + " " + rawContent[item][3];
+            let allProds = JSON.parse(xhttp.responseText);
+            console.log(allProds);
+            let gallery = document.getElementById("gallery");
+            for (let item = 0; item < allProds.length; item++) {
+                let display = document.createElement("div");
+                var img = document.createElement("img");
+                img.src = "../" + toString([item]["image"]); // need to fix this
+                var name = document.createElement("h3");
+                name.innerHTML = allProds[item]["product_name"];
+                var price = document.createElement("p");
+                price.innerHTML = "£" + allProds[item]["price"]; 
+                display.appendChild(img) ;
+                display.appendChild(name) ;
+                display.appendChild(price) ;
                 gallery.appendChild(display);
             }
             // document.getElementById("txt").innerHTML = xhttp.responseText;
