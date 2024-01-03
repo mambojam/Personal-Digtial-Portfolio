@@ -71,7 +71,9 @@ h2, h3, p {
 
 /* Styling for the shop starts here */
 nav.shop {
+    background-color: var(--blue-munsell);
     text-align: center;
+    height: 10vh;
 }
 nav.shop a {
     color: black;
@@ -81,21 +83,46 @@ nav.shop a {
 #gallery {
     display: flex;
     flex-wrap: wrap;
-    background-color: grey;
+    background-color: var(--blue-munsell);
     align-items: flex-start;
     justify-content: space-evenly;
     padding: 0px;
-    margin: 0px auto;
+    margin: 10px auto;
+
 }
 
 #gallery div {
-    background-color: orange;
+    background-color: var(--carrot-orange);
+    color: var(--jet);
     min-width: 250px;
-    max-width: 75vw;
+    max-width: 20vw;
     min-height: 300px;
     max-height: 75vh;
     margin: 1.5vw;
-    text-align: center;
+    text-align: left;
     line-height: 2vw;
     font-size: 2vh;
+    border: 2px solid var(--charcoal);
 }
+
+#gallery div img {
+    height: 80%;
+    width: 100%;
+    object-fit: contain;
+
+}
+
+form div.category label {
+    padding: 10px;
+    display: flex;
+}
+
+form div.price label {
+    padding: 10px;
+    display: inline-flex;
+}
+
+--carrot-orange: #f18f01ff;
+    --blue-munsell: #048ba8ff;
+    --charcoal: #2e4057ff;
+    --jet: #2f2d2eff;

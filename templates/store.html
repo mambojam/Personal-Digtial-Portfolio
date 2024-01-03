@@ -10,19 +10,21 @@
     <br>
     <div>
         <h3>Find what you're looking for using our filtered search</h3>
-        <form id="filterForm" onsubmit="loadItems(); return false;">
-            <label>Category:</label>
-            <br>
-                <label>Rock Shoes<input type ="checkbox" value="Rock_Shoe" class="category"></label>
-                <label>Ropes<input type ="checkbox" value="Rope" class="category"></label>
-                <label>Harnesses<input type ="checkbox" value="Harness" class="category"></label>
-                <label>Quickdraws<input type ="checkbox" value="Quickdraw" class="category"></label>
-            <br>
-            <label>Price:</label>
-            <br>
-                <label>Min:<input type="text" name="minPrice"></label>
-                <label>Max:<input type="text" name="maxPrice"></label>
-            <br>
+        <!-- <form id="filterForm" onsubmit="loadItems(); return false;"> -->
+        <form id="filterForm" action="/searchItems" method="POST">
+            <div class="category">
+                <h3>Category </h3>
+                <label>Rock Shoes<input type="checkbox" name="category" value="Rock_Shoe"></label>
+                <label>Ropes<input type="checkbox" name="category" value="Rope"></label>
+                <label>Harnesses<input type="checkbox" name="category" value="Harness"></label>
+                <label>Quickdraws<input type="checkbox" name="category" value="Quickdraw"></label>
+            </div>
+            <div class="price">
+                <h3>Price </h3>
+                <label>Min: <input type="text" name="minPrice"></label>
+                <label>Max: <input type="text" name="maxPrice"></label>
+            </div>
+                
             <button type="submit">Search</button>
         </form>
         
@@ -32,7 +34,7 @@
         
     </div>
     
-    <script>
+    <!-- <script>
         function loadItems() {
         var checked = document.querySelectorAll('input[class="category"]:checked');
         var categories = Array.from(checked).map(input => input.value);
@@ -53,31 +55,33 @@
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", '/searchItems', true); // true is asynchronous
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.onreadystatechange = function() {
-          if (xhttp.readyState === 4 && xhttp.status === 200) {
-            let allProds = JSON.parse(xhttp.responseText);
-            console.log(allProds);
-            let gallery = document.getElementById("gallery");
-            for (let item = 0; item < allProds.length; item++) {
-                let display = document.createElement("div");
-                var img = document.createElement("img");
-                img.src = "../" + toString([item]["image"]); // need to fix this
-                var name = document.createElement("h3");
-                name.innerHTML = allProds[item]["product_name"];
-                var price = document.createElement("p");
-                price.innerHTML = "£" + allProds[item]["price"]; 
-                display.appendChild(img) ;
-                display.appendChild(name) ;
-                display.appendChild(price) ;
-                gallery.appendChild(display);
-            }
-            // document.getElementById("txt").innerHTML = xhttp.responseText;
-          } else {
-            console.error(xhttp.statusText);
-          }
-        };
+        // xhttp.onreadystatechange = function() {
+        //   if (xhttp.readyState === 4 && xhttp.status === 200) {
+        //     let allProds = JSON.parse(xhttp.responseText);
+        //     console.log(allProds);
+        //     let gallery = document.getElementById("gallery");
+        //     for (let item = 0; item < allProds.length; item++) {
+        //         let display = document.createElement("div"); // create a box for the prod
+        //         var img = document.createElement("img"); // 
+        //         img.src = "data:image/png;base64," + allProds[item]["image"]; // need to fix this
+        //         var name = document.createElement("h3");
+        //         name.innerHTML = allProds[item]["product_name"];
+        //         var price = document.createElement("p");
+        //         price.innerHTML = "£" + allProds[item]["price"]; 
+        //         display.appendChild(img) ;
+        //         display.appendChild(name) ;
+        //         display.appendChild(price) ;
+        //         gallery.appendChild(display);
+        //     }
+        //     // document.getElementById("txt").innerHTML = xhttp.responseText;
+        //   } else {
+        //     console.error(xhttp.statusText);
+        //   }
+        // };
         xhttp.send(params);
         return false;
-    }
-    </script>
+    } -->
+
+
+    <!-- </script> -->
 {% endblock %}

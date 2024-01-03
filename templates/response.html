@@ -1,13 +1,40 @@
-{%extends "layout.html"%}
+{%extends "store.html"%}
 
 {%block content%}
-{% for row in productlist %}
-<div class="product">
-    <div style ="border: 1px solid grey; border-radius: 5px; padding: 16px; margin-bottom: 16px; height: 300px;">
-        <img src="static/images/{{row.image}}" alt="row.name" class="img-responsive" >
-        <p align="center"><strong><a href="#">{{row.product_name}}</a></strong></p>
-        <h4 style="text-align: center;" class="text-danger">{{row.price}}</h4>
-    </div>
+<h2>Climbing Shop</h2>
+    <nav class="shop">
+        <a href="/searchItems">Shop</a>
+        <a href="2">Account</a>
+        <a href="3">About us</a>
+    </nav>
+<br>
+<div>
+    <h3>Find what you're looking for using our filtered search</h3>
+    <form id="filterForm" action="/searchItems" method="POST">
+        <div class="category">
+            <h3>Category </h3>
+            <label>Rock Shoes<input type="checkbox" name="category" value="Rock_Shoe"></label>
+            <label>Ropes<input type="checkbox" name="category" value="Rope"></label>
+            <label>Harnesses<input type="checkbox" name="category" value="Harness"></label>
+            <label>Quickdraws<input type="checkbox" name="category" value="Quickdraw"></label>
+        </div>
+        <div class="price">
+            <h3>Price </h3>
+            <label>Min: <input type="text" name="minPrice"></label>
+            <label>Max: <input type="text" name="maxPrice"></label>
+        </div>
+            
+        <button type="submit">Search</button>
+    </form>
+    
 </div>
-{% endfor %}
+<div id="gallery">
+    {% for product in all_products %}
+    <div class="product">
+        <img src="static/images/{{ product['image'] }}" alt="{{ product['product_name'] }}" class="img-responsive" loading="lazy">
+        <p align="center"><strong><a href="#">{{product['product_name']}}</a></strong></p>
+        <h4 style="text-align: center;" class="text-danger">£{{product['price']}}</h4>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -8,15 +8,21 @@ def convertToBinaryData(filename):
 
 def insertBLOB(data_tuple):
     try:
-        conn = sqlite3.connect('Online_Store_DB.db')
+        conn = sqlite3.connect('Online_Store_DB.db', timeout=10)
         cur = conn.cursor()
         print("Connected to SQLite")
         sqlite_insert_blob_query = """ INSERT INTO Product
                                   (product_name, category, price, image) VALUES (?, ?, ?, ?)"""
 
-        prod_image = convertToBinaryData(data_tuple[3])
+        blob_image = convertToBinaryData(data_tuple[3])
+        blob_data_list = []
+        for num in range(len(data_tuple)):
+            if num == 3:
+                blob_data_list.append(blob_image)
+            else:
+                blob_data_list.append(data_tuple[num])
         
-        cur.execute(sqlite_insert_blob_query, data_tuple)
+        cur.execute(sqlite_insert_blob_query, blob_data_list)
         conn.commit()
         print("Image and file inserted successfully as a BLOB into a table")
         cur.close()
