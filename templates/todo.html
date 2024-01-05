@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+<!-- .content div -->
+{% block content %} 
+
+<h1>To-do App </h1>
+
+<form id="todoForm" onsubmit="return addTodo();">
+    <label>What do you need to do?<input type="text" name="todo"></label>
+    <button type="submit">Add to-do </button>
+</form>
+
+<div>
+    <ol id="todoList" style="border: 1px solid cadetblue; justify-content: center;">
+        {% if todos %}
+            {% for todo in todos %}
+            <div class="listItem" style="display: flex; margin:auto; justify-content: center; padding-bottom: 2px;">
+                <li contenteditable="true" class="todoItem" style="width: 200px; height: 50px;">{{todo}}</li>
+                <input type="checkbox" class="complete" value="complete" onclick="completeTodo()">
+            </div>
+            {% endfor %}
+        {% endif %}
+    </ol>
+    <button type="button" onclick="return updateTodo()">Update to-dos</button>
+    <p id="msg"></p>
+</div>
+<div>
+
+</div>
+
+
+{% endblock %}
+
