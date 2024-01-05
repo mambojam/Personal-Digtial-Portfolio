@@ -3,10 +3,11 @@ body {
     --blue-munsell: #048ba8ff;
     --charcoal: #2e4057ff;
     --jet: #2f2d2eff;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Verdana', 'sans-Serif';
     margin: 0;
     padding: 0;
     background-color: var(--jet);
+    margin: auto;
 }
 
 header {
@@ -85,6 +86,7 @@ img .banner {
     height: 100vh;
 }
 
+
 /* Styling for the shop starts here */
 nav.shop {
     background-color: var(--blue-munsell);
@@ -137,6 +139,72 @@ form div.price label {
     padding: 10px;
     display: inline-flex;
 }
+
+/* Styling for the to-do list starts here */
+
+#todoForm {
+    max-width:400px;
+    margin: auto;
+}
+
+#todoForm i {
+    position: absolute;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.formElements {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+}
+  
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-indent: 30px;
+    margin-bottom: 3px;
+}
+
+.formElements button {
+    background-color: var(--jet);
+    color: white;
+    padding-top: 0;
+    margin-left: 2px;
+    border: solid rgb(11, 11, 114);
+    border-radius: 5px;
+}
+
+.formElements button:hover {
+    cursor: pointer;
+    border: solid var(--blue-munsell);
+}
+
+#todoListBox {
+    border: 2px solid black;
+    
+}
+#todoList {
+    list-style-type: none;
+    margin: auto;
+    border: 1px solid cadetblue;
+    border-radius: 10px;
+    background-color: var(--blue-munsell);
+    justify-content: center;
+    width: 50vw;
+    padding: 10px;
+}
+
+div.listItem {
+    display: flex; 
+    margin: auto;
+    justify-content: center;
+    margin-bottom: 15px;
+    padding: 8px;
+    background-color: var(--jet);
+    color: #fff;
+}
+
 
 --carrot-orange: #f18f01ff;
     --blue-munsell: #048ba8ff;

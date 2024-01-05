@@ -19,25 +19,25 @@ function addTodo() {
     xhttp.onreadystatechange = function(){
         if (xhttp.readyState === 4 && xhttp.status === 200) {
         console.log(xhttp.responseText);
-        // New TODO
+        // New TODO <li contenteditable="true" class="todoItem">{{todo}}</li>
         let todoItem = document.createElement("li");
         todoItem.contentEditable = true;
         todoItem.classList.add("todoItem");
         todoItem.innerHTML = todo;
-        todoItem.style = "width: 200px; height: 50px;";
-        // CHECKBOX
-        let checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.name.add = "complete_todo";
-        checkbox.onchange = "return completeTodo()";
+        // CHECKBOX <input type="checkbox" class="complete" value="complete" onclick="completeTodo()">
+        let myCheckbox = document.createElement("input");
+        myCheckbox.type = "checkbox";
+        myCheckbox.classList.add("complete") ;
+        myCheckbox.onclick = "completeTodo()";
         // Add new todo and Chkbx into listItem div into todoList div 
         let todoList = document.getElementById("todoList");
         let listItem = document.createElement("div");
-        listItem.className.add = "listItem";
-        listItem.style = "display: flex; margin:auto; justify-content: center; padding-bottom: 2px;"
-        listItem.appendChild(todoItem);
-        listItem.appendChild(checkbox);
         todoList.appendChild(listItem);
+
+        listItem.classList.add("listItem");
+        listItem.appendChild(todoItem);
+        listItem.appendChild(myCheckbox);
+      
 
         } else {
         console.error(xhttp.statusText);

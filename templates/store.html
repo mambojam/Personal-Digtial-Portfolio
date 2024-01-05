@@ -12,22 +12,22 @@
         <h3>Find what you're looking for using our filtered search</h3>
         <!-- <form id="filterForm" onsubmit="loadItems(); return false;"> -->
         <form id="filterForm" action="/searchItems" method="POST">
-            <div class="category">
-                <h3>Category </h3>
-                <label>Rock Shoes<input type="checkbox" name="category" value="Rock_Shoe"></label>
-                <label>Ropes<input type="checkbox" name="category" value="Rope"></label>
-                <label>Harnesses<input type="checkbox" name="category" value="Harness"></label>
-                <label>Quickdraws<input type="checkbox" name="category" value="Quickdraw"></label>
+            <div style="display: flex; justify-content: center;">
+                <div class="category">
+                    <h3>Category </h3>
+                    <label>Rock Shoes<input type="checkbox" name="category" value="Rock_Shoe"></label>
+                    <label>Ropes<input type="checkbox" name="category" value="Rope"></label>
+                    <label>Harnesses<input type="checkbox" name="category" value="Harness"></label>
+                    <label>Quickdraws<input type="checkbox" name="category" value="Quickdraw"></label>
+                </div>
+                <div class="price">
+                    <h3>Price </h3>
+                    <label>Min: <input type="text" name="minPrice"></label>
+                    <label>Max: <input type="text" name="maxPrice"></label>
+                </div>
+                <button type="submit">Search</button>
             </div>
-            <div class="price">
-                <h3>Price </h3>
-                <label>Min: <input type="text" name="minPrice"></label>
-                <label>Max: <input type="text" name="maxPrice"></label>
-            </div>
-                
-            <button type="submit">Search</button>
-        </form>
-        
+        </form>   
     </div>
     <h2>Results</h2>
     <div id="gallery">
