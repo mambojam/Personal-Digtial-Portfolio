@@ -2,11 +2,9 @@ from flask import Flask, render_template, request, jsonify
 import json
 import sqlite3
 import os
-from PIL import Image
-from io import BytesIO
-import base64
 import copy
 from functions import get_todos, write_todos
+import gunicorn
 
 app = Flask(__name__)
 
