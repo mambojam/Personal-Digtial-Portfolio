@@ -14,20 +14,20 @@ projects_data = [
     
         {   'html': 'store.html',
             'title': 'Online Store',
-            'description': 'When I first started learning SQL, I set up a simple DB for online outdoor clothes store. I\'ve now moved this into SQLite and used Flask, JINJA and HTML forms to generate a query and display results on the webpage',
-            'image': 'static/images/project1.jpg'
+            'description': "When I first started learning SQL, I set up a simple DB for online outdoor clothes store. I've now moved this into SQLite and used Flask, JINJA and HTML forms to generate a query and display results on the webpage",
+            'image': 'static/images/store.png'
         },
         {   
             'html': 'todo.html',
-            'title': 'Project 2',
-            'description': 'Description of Project 2.',
-            'image': 'static/images/project2.jpg'
+            'title': 'Todo List',
+            'description': "I learnt the basics of Python following a Udemy course. The first part of the course involved designing a todo list application on the command line. I've built a front-end for this now and used some AJAX functions to dynamically manage user input on the front-end and a Flask server which manages the storage of the forms",
+            'image': 'static/images/todo.png'
         },
         {   
-            'html': 'game.html',
-            'title': 'Project 3',
-            'description': 'Description of Project 2.',
-            'image': 'static/images/project3.jpg'
+            'html': 'comingsoon.html',
+            'title': 'Game coming soon..',
+            'description': "I've always been a big gamer, and so developing my own mini-games was a must once I'd learned the basics of programming. Using PyGame I developed a Pong game - it still has some bugs which I haven't had time to fix, but has a functioning, user controlled paddle, a ball that spawns and travels at a random trajectory within a range and a scroe tracker",
+            'image': 'static/images/pong.png'
         }   
 ]
 
@@ -90,28 +90,6 @@ def loadItems():
             conn.close()
             return render_template("response.html", all_products=all_products)
 
-# @app.route('/render_image', methods=['GET'])
-# def render_image():
-#     conn = sqlite3.connect('Online_Store_DB.db') 
-#     cur = conn.cursor()
-
-#     # create the query 
-#     query = "SELECT image FROM Product WHERE product_name = 'Scarpa_Quantix_SF'"
-    
-#     # execute query and retrieve results
-#     cur.execute(query)
-#     blob_data = cur.fetchone()
-
-
-#     # Convert the BLOBs to Base-64
-#     image = Image.open(BytesIO(blob_data)) #converts blob back to image
-#     image_base64 = base64.b64encode(image.read()).decode('utf-8') # converts image back to base-64
-#     image = image_base64
-#     print("hello")
-#     app.logger.info(f"Product name: {product.product_name} Base64 length: {len(product.image)}")
-    
-#     conn.close()
-#     return render_template("image.html", image=image)
 
 @app.route('/AddTodo', methods=['GET', 'POST'])
 def addtodo():
@@ -144,78 +122,9 @@ def updatetodo():
     write_todos(saved_todos)
     return "Todos updated successfully"
 
-@app.route('/to_do', methods=('GET', 'POST'))
-def todos():
-    
-    while True:
-        user_action = input("Type add, show, edit, complete or exit: ")
-        user_action = user_action.strip()
-
-        if user_action.startswith("add"):
-            todo = (user_action[4:])
-
-            todos = get_todos()
-
-            todos.append(todo + '\n')
-
-            write_todos(todos)
-
-        elif user_action.startswith("show"):
-            todos = get_todos()
-
-                # new_todos = [item.strip('\n') for item in todos]
-                # above is a list comprehension which simplifies a section to remove the break line
-                # however we can make it even more simple using the strip function as below:
-
-            for index, item in enumerate(todos):
-                item = item.strip('\n')
-                row = f"{index +1}.{item}"
-                print(row)
-
-        elif user_action.startswith('edit'):
-            try:
-                number = int(user_action[5:])
-                print(number)
-
-                number = number - 1
-
-                todos = get_todos()
-
-                new_todo = input("Enter new todo: ")
-                todos[number] = new_todo + '\n'
-
-                write_todos(todos)
-
-            except ValueError:
-                print("Invalid command")
-                continue
-
-        elif user_action.startswith('complete'):
-
-            try:
-                number = int(user_action[9:])
-
-                todos = get_todos()
-
-                index = number - 1
-                todo_to_remove = todos[index].strip('\n')
-                todos.pop(index)
-
-                write_todos(todos)
-
-                message = f"{todo_to_remove} was removed from the list"
-                print(message)
-            except IndexError:
-                print("no item with corresponding number")
-                continue
-
-        elif user_action.startswith('exit'):
-            break
-        else:
-            print("Invalid command")
-
-    print("Bye!")
-
+@app.route('/comingsoon', methods=['GET'])
+def comingsoon():
+    return render_template('comingsoon.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -28,7 +28,14 @@ function addTodo() {
         let myCheckbox = document.createElement("input");
         myCheckbox.type = "checkbox";
         myCheckbox.classList.add("complete") ;
-        myCheckbox.onclick = "completeTodo()";
+        myCheckbox.addEventListener("click", completeTodo);
+        
+        // // Changing checkbox for a button instead                
+        // let checkButton = document.createElement("button");
+        // checkButton.classList.add("completeButton");
+        // checkButton.type = "button";
+        // checkButton.addEventListener("click", completeTodo.bind(checkButton));
+        
         // Add new todo and Chkbx into listItem div into todoList div 
         let todoList = document.getElementById("todoList");
         let listItem = document.createElement("div");
@@ -89,29 +96,36 @@ function updateTodo() {
     };
 
 
+completeButtons = document.getElementsByClassName("completeButton");
+for (let i = 0; i < completeButtons.length; i++) {
+    completeButtons[i].addEventListener("click", completeTodo.bind(completeButtons[i]));
+} 
+
 // COMPLETE todo
+
+// const completeTodo = () => {
+//     console.log("completeTodo function called");
+//     const completeItem = this; // Captures "this" from the enclosing scope
+//     console.log(completeItem);
+//     const parent = completeItem.parentElement;
+//     const todo = parent.querySelector(".todoItem").textContent;
+//     console.log(todo);
+//     parent.remove();
+//   };
+
 function completeTodo() {
+//     console.log("completeTodo function called");
+//     let completeItem = this;
+//     console.log(completeItem);
+//     let parent = completeItem.parentElement;
+//     todo = parent.querySelector(".todoItem").textContent;
+//     console.log(todo);
+//     parent.remove();
     let completeCheck = document.querySelectorAll('input[class="complete"]:checked');
     completeCheck = completeCheck[0];
     parent = completeCheck.parentElement;
     todo = parent.querySelector(".todoItem").textContent;
     console.log(todo);
     parent.remove();
-
-    // completeItem = completeCheck.previousSibling;
-    // previousSib = completeItem.previousSibling;
-    // prepresib = previousSib.previousSibling;
-    // console.log(completeCheck);
-    // console.log(completeItem);
-    // console.log(previousSib);
-    // console.log(prepresib);
-    // // let completeCheck = document.querySelectorAll('input[class="complete"]:checked');
-    // let allCheck = document.getElementsByClassName("complete");
-    // let checked = allCheck.checked;
-    // console.log(allCheck);
-    // console.log(checked);
-
-    // let parent = checked.parentElement;
-    // console.log(parent);
 }
 

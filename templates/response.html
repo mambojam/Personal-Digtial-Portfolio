@@ -10,23 +10,27 @@
 <br>
 <div>
     <h3>Find what you're looking for using our filtered search</h3>
+    <!-- <form id="filterForm" onsubmit="loadItems(); return false;"> -->
     <form id="filterForm" action="/searchItems" method="POST">
-        <div class="category">
-            <h3>Category </h3>
-            <label>Rock Shoes<input type="checkbox" name="category" value="Rock_Shoe"></label>
-            <label>Ropes<input type="checkbox" name="category" value="Rope"></label>
-            <label>Harnesses<input type="checkbox" name="category" value="Harness"></label>
-            <label>Quickdraws<input type="checkbox" name="category" value="Quickdraw"></label>
+        <div class="inputFields">
+            <div class="category">
+                <h3>Category </h3>
+                <div id="categories" class="fields">
+                    <label>Rock Shoes<input type="checkbox" name="category" value="Rock_Shoe"></label>
+                    <label>Ropes<input type="checkbox" name="category" value="Rope"></label>
+                    <label>Harnesses<input type="checkbox" name="category" value="Harness"></label>
+                    <label>Quickdraws<input type="checkbox" name="category" value="Quickdraw"></label>
+                </div>
+            </div>
+            <div id="price" class="fields">
+                <h3>Price </h3>
+                <label>Min: <input type="text" name="minPrice"></label>
+                <label>Max: <input type="text" name="maxPrice"></label>
+            </div>
         </div>
-        <div class="price">
-            <h3>Price </h3>
-            <label>Min: <input type="text" name="minPrice"></label>
-            <label>Max: <input type="text" name="maxPrice"></label>
-        </div>
-            
-        <button type="submit">Search</button>
-    </form>
-    
+        <button id="searchShopButton" type="submit">Search</button>
+        
+    </form>   
 </div>
 <div id="gallery">
     {% for product in all_products %}

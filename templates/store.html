@@ -3,85 +3,37 @@
 {%block content%}
     <h2>Climbing Shop</h2>
     <nav class="shop">
-        <a href="1">Shop</a>
-        <a href="2">Account</a>
-        <a href="3">About us</a>
+        <a href="/searchItems">Shop</a>
+        <a href="/comingsoon">Account</a>
+        <a href="/comingsoon">About us</a>
     </nav>
     <br>
     <div>
         <h3>Find what you're looking for using our filtered search</h3>
         <!-- <form id="filterForm" onsubmit="loadItems(); return false;"> -->
         <form id="filterForm" action="/searchItems" method="POST">
-            <div style="display: flex; justify-content: center;">
+            <div class="inputFields">
                 <div class="category">
                     <h3>Category </h3>
-                    <label>Rock Shoes<input type="checkbox" name="category" value="Rock_Shoe"></label>
-                    <label>Ropes<input type="checkbox" name="category" value="Rope"></label>
-                    <label>Harnesses<input type="checkbox" name="category" value="Harness"></label>
-                    <label>Quickdraws<input type="checkbox" name="category" value="Quickdraw"></label>
+                    <div id="categories" class="fields">
+                        <label>Rock Shoes<input type="checkbox" name="category" value="Rock_Shoe"></label>
+                        <label>Ropes<input type="checkbox" name="category" value="Rope"></label>
+                        <label>Harnesses<input type="checkbox" name="category" value="Harness"></label>
+                        <label>Quickdraws<input type="checkbox" name="category" value="Quickdraw"></label>
+                    </div>
                 </div>
-                <div class="price">
+                <div id="price" class="fields">
                     <h3>Price </h3>
                     <label>Min: <input type="text" name="minPrice"></label>
                     <label>Max: <input type="text" name="maxPrice"></label>
                 </div>
-                <button type="submit">Search</button>
             </div>
+            <button id="searchShopButton" type="submit">Search</button>
+            
         </form>   
     </div>
     <h2>Results</h2>
     <div id="gallery">
         
     </div>
-    
-    <!-- <script>
-        function loadItems() {
-        var checked = document.querySelectorAll('input[class="category"]:checked');
-        var categories = Array.from(checked).map(input => input.value);
-        if (categories.length === 0) {
-            allCats = document.querySelectorAll('input[class="category"]');
-            categories = Array.from(allCats).map(input => input.value);
-        }
-        var minPrice = document.forms["filterForm"]["minPrice"].value;
-        if (minPrice === "") {
-            minPrice = "0";
-        }
-        var maxPrice = document.forms["filterForm"]["maxPrice"].value;
-        if (maxPrice === "") {
-            maxPrice = "10000";
-        }
-
-        var params = 'categories=' + JSON.stringify(categories) + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice;        
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", '/searchItems', true); // true is asynchronous
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        // xhttp.onreadystatechange = function() {
-        //   if (xhttp.readyState === 4 && xhttp.status === 200) {
-        //     let allProds = JSON.parse(xhttp.responseText);
-        //     console.log(allProds);
-        //     let gallery = document.getElementById("gallery");
-        //     for (let item = 0; item < allProds.length; item++) {
-        //         let display = document.createElement("div"); // create a box for the prod
-        //         var img = document.createElement("img"); // 
-        //         img.src = "data:image/png;base64," + allProds[item]["image"]; // need to fix this
-        //         var name = document.createElement("h3");
-        //         name.innerHTML = allProds[item]["product_name"];
-        //         var price = document.createElement("p");
-        //         price.innerHTML = "£" + allProds[item]["price"]; 
-        //         display.appendChild(img) ;
-        //         display.appendChild(name) ;
-        //         display.appendChild(price) ;
-        //         gallery.appendChild(display);
-        //     }
-        //     // document.getElementById("txt").innerHTML = xhttp.responseText;
-        //   } else {
-        //     console.error(xhttp.statusText);
-        //   }
-        // };
-        xhttp.send(params);
-        return false;
-    } -->
-
-
-    <!-- </script> -->
 {% endblock %}

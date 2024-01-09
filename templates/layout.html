@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/1bd7707dce.js" crossorigin="anonymous"></script>
     <title>{% block title %}My Projects{% endblock %}</title>
 </head>
-<body>
+<body onload = "clearAllForms()">
     <header>
         <h1>My Project Showcase</h1>
         <nav>
@@ -23,5 +23,18 @@
         &copy; 2023 My Project Showcase
     </footer>
 </body>
+<script>
+    function clearAllForms(){
+        let inputFields = document.getElementsByTagName("input");
+        for (let i = 0; i < inputFields.length; i++){
+            if (inputFields[i].type == 'checkbox') {
+                inputFields[i].checked = false;
+            }
+            else if (inputFields[i].type == 'text'){
+                inputFields[i].value = "";
+            }
+        }
+    }
+</script>
 </html>
 

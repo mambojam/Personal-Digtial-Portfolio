@@ -20,13 +20,15 @@
             {% for todo in todos %}
             <div class="listItem">
                 <li contenteditable="true" class="todoItem">{{todo}}</li>
-                <i class="fa-regular fa-square-check"></i>
+                <!-- <button class="completeButton" type="button" onclick="completeTodo().bind(button)">
+                    <i class="fa-regular fa-square-check"></i>
+                </button> -->
                 <input type="checkbox" class="complete" value="complete" onclick="completeTodo()">
             </div>
             {% endfor %}
         {% endif %}
     </ul>
-    <button type="button" onclick="return updateTodo()">Update to-dos</button>
+    <button type="button" id="updateButton" onclick="return updateTodo()">Update to-dos</button>
     <p id="msg"></p>
 </div>
 <div>
