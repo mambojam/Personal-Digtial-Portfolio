@@ -102,8 +102,8 @@ function completeTodo() {
     completeCheck = completeCheck[0];
     // get it's parent element (div.todoItem) 
     let parent = completeCheck.parentElement;
-    // get the todo item - we don't do anything with this
-    // let todo = parent.querySelector(".todoItem").textContent;
+    // get the todo item 
+    let todo = parent.querySelector(".todoItem").textContent;
     // Remove the todo item div
     parent.remove();
     // display complete message
