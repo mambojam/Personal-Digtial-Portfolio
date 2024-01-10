@@ -4,7 +4,7 @@
 {% block content %} 
 
 <h1>To-do App </h1>
-
+<!-- Add todos -->
 <form id="todoForm" onsubmit="return addTodo();">
     <div class="formElements">
         <i class="fa-solid fa-plus" class="icon"></i>
@@ -16,20 +16,20 @@
 
 <div id="todoListBox">
     <ul id="todoList">
+        <!-- JINJA for todo list -->
         {% if todos %}
             {% for todo in todos %}
             <div class="listItem">
                 <li contenteditable="true" class="todoItem">{{todo}}</li>
-                <!-- <button class="completeButton" type="button" onclick="completeTodo().bind(button)">
-                    <i class="fa-regular fa-square-check"></i>
-                </button> -->
+                <!-- Complete todo -->
                 <input type="checkbox" class="complete" value="complete" onclick="completeTodo(this)">
             </div>
             {% endfor %}
         {% endif %}
     </ul>
+    <!-- Save todos -->
     <button type="button" id="updateButton" onclick="return updateTodo()">Update to-dos</button>
-    <p id="msg"></p> <!-- success message goes here -->
+    <p id="msg"></p> <!-- Success message goes here -->
 </div>
 <div>
 

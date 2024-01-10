@@ -8,15 +8,18 @@
     <script src="https://kit.fontawesome.com/1bd7707dce.js" crossorigin="anonymous"></script>
     <title>{% block title %}My Projects{% endblock %}</title>
 </head>
-<body onload = "clearAllForms()">
+<!-- clears all forms and checkboxes -->
+<body onload = "clearAllForms()"> 
     <header>
         <h1>My Project Showcase</h1>
         <nav>
+            <!-- get the routes at these functions -->
             <a href="{{ url_for('home') }}">Home</a>
             <a href="{{ url_for('projects') }}">Projects</a>
         </nav>
     </header>
     <div class="content">
+        <!-- set up content block for other pages using template -->
         {% block content %}{% endblock %}
     </div>
     <footer>
@@ -26,11 +29,14 @@
 </body>
 <script>
     function clearAllForms(){
+        // find the inputs
         let inputFields = document.getElementsByTagName("input");
         for (let i = 0; i < inputFields.length; i++){
+            // uncheck checkboxes
             if (inputFields[i].type == 'checkbox') {
                 inputFields[i].checked = false;
             }
+            // clear text fields
             else if (inputFields[i].type == 'text'){
                 inputFields[i].value = "";
             }

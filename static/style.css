@@ -61,8 +61,8 @@ footer {
 .project-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly; /* Evenly distribute projects */
-    gap: 20px; /* Consistent spacing between projects */
+    justify-content: space-evenly; 
+    gap: 20px; /* add gap like in grid */
   }
   
   .project {

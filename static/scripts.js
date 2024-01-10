@@ -4,10 +4,8 @@
 function addTodo() {
 
     let todo = document.forms["todoForm"]["todo"].value;
-
-    console.log("addTodo function called."); // Check if the function is called
     
-    // Check if the todo is not empty
+    // Check if the todo is empty
     if (!todo) {
     alert("Please enter a to-do item.");
     return false;
@@ -69,7 +67,7 @@ function updateTodo() {
     const jsonTodos = JSON.stringify(todoItems);
     console.log(jsonTodos);
 
-    // Check if the todo is not empty
+    // Check if todos is empty
     if (!todos) {
         alert("Please enter a to-do item.");
         return false;
@@ -98,7 +96,6 @@ function updateTodo() {
 
 
 function completeTodo() {
-    // let taskId = checkbox.value;
     // find all checked boxes (should only ever be the one that was checked)
     let completeCheck = document.querySelectorAll('input[class="complete"]:checked');
     // take this from the list [0] as it is the only item
@@ -106,7 +103,7 @@ function completeTodo() {
     // get it's parent element (div.todoItem) 
     let parent = completeCheck.parentElement;
     // get the todo item - we don't do anything with this
-    let todo = parent.querySelector(".todoItem").textContent;
+    // let todo = parent.querySelector(".todoItem").textContent;
     // Remove the todo item div
     parent.remove();
     // display complete message

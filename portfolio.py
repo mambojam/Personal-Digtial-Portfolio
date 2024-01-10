@@ -8,6 +8,7 @@ import gunicorn
 
 app = Flask(__name__)
 
+# Use this to get the project data for JINJA templating projects page
 projects_data = [
     
         {   'html': 'store.html',
@@ -29,6 +30,7 @@ projects_data = [
         }   
 ]
 
+# Homepage
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -37,21 +39,25 @@ def home():
 def projects():
     return render_template('projects.html', projects=projects_data)
 
+# Get into the project
 @app.route('/project/<string:html_file>')
+# html_file is dynamically generated for project['html']
 def project_detail(html_file):
+    # todo homepage needs the todos as parameters
     if html_file == "todo.html":
         init_db()
         todos = get_todos()
         return render_template("todo.html", todos=todos)
     return render_template(html_file)
 
+# store homepage
 @app.route('/searchItems', methods=['GET', 'POST'])
 def loadItems():
     if request.method == 'GET':
         return render_template("store.html")
-
+# GEt items from db
     elif request.method == 'POST':
-
+# Set default parameters
         categories = request.form.getlist('category')
         if categories == []:
             categories = ["Rock_Shoe","Rope","Harness","Quickdraw"]
@@ -93,11 +99,12 @@ def loadItems():
 
 @app.route('/AddTodo', methods=['GET', 'POST'])
 def addtodo():
+    # another route to todos homepage
     if request.method == 'GET':
         init_db()
         todos = get_todos()
         render_template("todo.html", todos=todos)
-
+    # write new todo to db
     if request.method == 'POST':
         init_db()
         todo = request.form['todo']
@@ -106,7 +113,7 @@ def addtodo():
         write_todos(todos)
         return todo
 
-
+# re-write todos
 @app.route('/UpdateTodo', methods=['POST'])
 def updatetodo():
     init_db()
@@ -114,7 +121,7 @@ def updatetodo():
     write_todos(todos)
     return "Todos updated successfully"
 
-
+# template for pages still in development
 @app.route('/comingsoon', methods=['GET'])
 def comingsoon():
     return render_template('comingsoon.html')
@@ -122,6 +129,3 @@ def comingsoon():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-## need to add images and work on the display next, also need to take the underscores out of names and swap for spaces
-## need to set default params

@@ -2,15 +2,17 @@
 
 {%block content%}
 <h2>Climbing Shop</h2>
+<!-- Embedded nav bar for shop -->
     <nav class="shop">
         <a href="/searchItems">Shop</a>
+        <!-- I want to build the account function in future so this is coming soon -->
         <a href="/comingsoon">Account</a>
         <a href="/comingsoon">About us</a>
     </nav>
 <br>
 <div>
     <h3>Find what you're looking for using our filtered search</h3>
-    <!-- <form id="filterForm" onsubmit="loadItems(); return false;"> -->
+    <!-- Standard HTML form to POST /searchItems -->
     <form id="filterForm" action="/searchItems" method="POST">
         <div class="inputFields">
             <div class="category">
@@ -33,6 +35,7 @@
     </form>   
 </div>
 <div id="gallery">
+    <!-- JINJA for the products that are returned -->
     {% for product in all_products %}
     <div class="product">
         <img src="static/images/{{ product['image'] }}" alt="{{ product['product_name'] }}" class="img-responsive" loading="lazy">
