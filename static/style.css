@@ -48,9 +48,13 @@ footer {
     padding: 10px;
     background-color: var(--charcoal);
     color: #fff;
-    position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+#GitLabIcon {
+  color: white;
+  padding-left: 10vw;
 }
 
 /* Project list styling */

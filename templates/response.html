@@ -4,8 +4,8 @@
 <h2>Climbing Shop</h2>
     <nav class="shop">
         <a href="/searchItems">Shop</a>
-        <a href="2">Account</a>
-        <a href="3">About us</a>
+        <a href="/comingsoon">Account</a>
+        <a href="/comingsoon">About us</a>
     </nav>
 <br>
 <div>
@@ -36,7 +36,7 @@
     {% for product in all_products %}
     <div class="product">
         <img src="static/images/{{ product['image'] }}" alt="{{ product['product_name'] }}" class="img-responsive" loading="lazy">
-        <p align="center"><strong><a href="#">{{product['product_name']}}</a></strong></p>
+        <p><strong><a href="/comingsoon" style="text-decoration: none;">{{product['product_name']}}</a></strong></p>
         <h4 style="text-align: center;">£{{product['price']}}</h4>
     </div>
     {% endfor %}

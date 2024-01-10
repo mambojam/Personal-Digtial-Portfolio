@@ -107,13 +107,6 @@ def addtodo():
         return todo
 
 
-    # if request.method == 'POST':
-    #     todo = request.form['todo']
-    #     todos = get_todos()
-    #     todos.append(todo + '\n')
-    #     write_todos(todos)
-    #     return todo
-
 @app.route('/UpdateTodo', methods=['POST'])
 def updatetodo():
     init_db()
@@ -121,17 +114,6 @@ def updatetodo():
     write_todos(todos)
     return "Todos updated successfully"
 
-    # todos = request.json
-    # print(todos)
-    # saved_todos = []
-    # for todo in todos:
-    #     if todo.endswith("\n"):
-    #         saved_todos.append(todo)
-    #     else:
-    #     	saved_todos.append(todo + " \n")
-
-    # write_todos(saved_todos)
-    # return "Todos updated successfully"
 
 @app.route('/comingsoon', methods=['GET'])
 def comingsoon():
