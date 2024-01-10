@@ -3,7 +3,7 @@ import json
 import sqlite3
 import os
 import copy
-from functions import get_todos, write_todos
+from functions import init_db, get_todos, write_todos
 import gunicorn
 
 app = Flask(__name__)
@@ -40,6 +40,7 @@ def projects():
 @app.route('/project/<string:html_file>')
 def project_detail(html_file):
     if html_file == "todo.html":
+        init_db()
         todos = get_todos()
         return render_template("todo.html", todos=todos)
     return render_template(html_file)
@@ -88,37 +89,49 @@ def loadItems():
             conn.close()
             return render_template("response.html", all_products=all_products)
 
+# Todo list 
 
 @app.route('/AddTodo', methods=['GET', 'POST'])
 def addtodo():
     if request.method == 'GET':
+        init_db()
         todos = get_todos()
         render_template("todo.html", todos=todos)
 
-
-
-
     if request.method == 'POST':
+        init_db()
         todo = request.form['todo']
         todos = get_todos()
-        todos.append(todo + '\n')
+        todos.append(todo)
         write_todos(todos)
         return todo
 
 
+    # if request.method == 'POST':
+    #     todo = request.form['todo']
+    #     todos = get_todos()
+    #     todos.append(todo + '\n')
+    #     write_todos(todos)
+    #     return todo
+
 @app.route('/UpdateTodo', methods=['POST'])
 def updatetodo():
+    init_db()
     todos = request.json
-    print(todos)
-    saved_todos = []
-    for todo in todos:
-        if todo.endswith("\n"):
-            saved_todos.append(todo)
-        else:
-        	saved_todos.append(todo + " \n")
-
-    write_todos(saved_todos)
+    write_todos(todos)
     return "Todos updated successfully"
+
+    # todos = request.json
+    # print(todos)
+    # saved_todos = []
+    # for todo in todos:
+    #     if todo.endswith("\n"):
+    #         saved_todos.append(todo)
+    #     else:
+    #     	saved_todos.append(todo + " \n")
+
+    # write_todos(saved_todos)
+    # return "Todos updated successfully"
 
 @app.route('/comingsoon', methods=['GET'])
 def comingsoon():

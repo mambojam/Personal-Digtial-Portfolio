@@ -8,7 +8,7 @@
 <form id="todoForm" onsubmit="return addTodo();">
     <div class="formElements">
         <i class="fa-solid fa-plus" class="icon"></i>
-        <input type="text" name="todo" placeholder="add a task.." class="input-field">
+        <input id="todoInput" type="text" name="todo" placeholder="add a task.." class="input-field">
         <button type="submit">Add</button>
     </div>
     
@@ -23,13 +23,13 @@
                 <!-- <button class="completeButton" type="button" onclick="completeTodo().bind(button)">
                     <i class="fa-regular fa-square-check"></i>
                 </button> -->
-                <input type="checkbox" class="complete" value="complete" onclick="completeTodo()">
+                <input type="checkbox" class="complete" value="complete" onclick="completeTodo(this)">
             </div>
             {% endfor %}
         {% endif %}
     </ul>
     <button type="button" id="updateButton" onclick="return updateTodo()">Update to-dos</button>
-    <p id="msg"></p>
+    <p id="msg"></p> <!-- success message goes here -->
 </div>
 <div>
 

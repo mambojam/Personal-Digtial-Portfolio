@@ -4,7 +4,9 @@
 function addTodo() {
 
     let todo = document.forms["todoForm"]["todo"].value;
+
     console.log("addTodo function called."); // Check if the function is called
+    
     // Check if the todo is not empty
     if (!todo) {
     alert("Please enter a to-do item.");
@@ -19,22 +21,19 @@ function addTodo() {
     xhttp.onreadystatechange = function(){
         if (xhttp.readyState === 4 && xhttp.status === 200) {
         console.log(xhttp.responseText);
+        
         // New TODO <li contenteditable="true" class="todoItem">{{todo}}</li>
         let todoItem = document.createElement("li");
         todoItem.contentEditable = true;
         todoItem.classList.add("todoItem");
         todoItem.innerHTML = todo;
+
         // CHECKBOX <input type="checkbox" class="complete" value="complete" onclick="completeTodo()">
         let myCheckbox = document.createElement("input");
         myCheckbox.type = "checkbox";
         myCheckbox.classList.add("complete") ;
-        myCheckbox.addEventListener("click", completeTodo);
-        
-        // // Changing checkbox for a button instead                
-        // let checkButton = document.createElement("button");
-        // checkButton.classList.add("completeButton");
-        // checkButton.type = "button";
-        // checkButton.addEventListener("click", completeTodo.bind(checkButton));
+        myCheckbox.addEventListener("click", function () { completeTodo(this); });
+
         
         // Add new todo and Chkbx into listItem div into todoList div 
         let todoList = document.getElementById("todoList");
@@ -56,6 +55,7 @@ function addTodo() {
 
 
 // UPDATE Todo
+
 function updateTodo() {
     // Get all the Todos
     const todoList = document.getElementById("todoList");
@@ -82,7 +82,7 @@ function updateTodo() {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
         console.log(xhttp.responseText);
         //  Display success message in page
-        let msg = "todos saved successfully";
+        let msg = "Todos saved successfully";
         let msgP = document.getElementById("msg");
         msgP.innerHTML = msg;
 
@@ -96,36 +96,23 @@ function updateTodo() {
     };
 
 
-completeButtons = document.getElementsByClassName("completeButton");
-for (let i = 0; i < completeButtons.length; i++) {
-    completeButtons[i].addEventListener("click", completeTodo.bind(completeButtons[i]));
-} 
-
-// COMPLETE todo
-
-// const completeTodo = () => {
-//     console.log("completeTodo function called");
-//     const completeItem = this; // Captures "this" from the enclosing scope
-//     console.log(completeItem);
-//     const parent = completeItem.parentElement;
-//     const todo = parent.querySelector(".todoItem").textContent;
-//     console.log(todo);
-//     parent.remove();
-//   };
 
 function completeTodo() {
-//     console.log("completeTodo function called");
-//     let completeItem = this;
-//     console.log(completeItem);
-//     let parent = completeItem.parentElement;
-//     todo = parent.querySelector(".todoItem").textContent;
-//     console.log(todo);
-//     parent.remove();
+    // let taskId = checkbox.value;
+    // find all checked boxes (should only ever be the one that was checked)
     let completeCheck = document.querySelectorAll('input[class="complete"]:checked');
+    // take this from the list [0] as it is the only item
     completeCheck = completeCheck[0];
-    parent = completeCheck.parentElement;
-    todo = parent.querySelector(".todoItem").textContent;
-    console.log(todo);
+    // get it's parent element (div.todoItem) 
+    let parent = completeCheck.parentElement;
+    // get the todo item - we don't do anything with this
+    let todo = parent.querySelector(".todoItem").textContent;
+    // Remove the todo item div
     parent.remove();
+    // display complete message
+    let msg = "Well done! " + todo + " was completed.";
+    let p = document.getElementById("msg");
+    p.innerHTML = msg;
+    
 }
 
