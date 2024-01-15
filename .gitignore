@@ -2,3 +2,10 @@ myVenv
 __pychache__
 notusing/
 templates/notusing/
+Online_Store_DB.db
+Online_Store_DB.sqbpro
+Online_Store_DB1.sqbpro
+Online_Store_DB2.sqbpro
+todo.db
+users.db
+users.db-journal
