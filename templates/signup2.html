@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h3>Welcome, {{firstName}}</h3>
+
+<!-- for new users -->
+<h4>New user?</h4>
+<p>Set up an account below</p>
+<form>
+    email <input type="text" name="email">
+    password <input type="text" name="password">
+    confirm password <input type="text" name="confirmPassword">
+</form>
+
+
+<!-- for existing users -->
+<p>Already have an account?</p>
+<a href="">login</a>
+
+{% endblock %}

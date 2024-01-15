@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, session
 import json
 import sqlite3
 import os
@@ -125,6 +125,38 @@ def updatetodo():
 @app.route('/comingsoon', methods=['GET'])
 def comingsoon():
     return render_template('comingsoon.html')
+
+
+
+# logins 
+
+@app.route('/signup/name&dob?', methods=['GET', 'POST'])
+def nameAndDob():
+    if request.method == 'GET':
+        return render_template("signup1.html")
+    if request.method == 'POST':
+        firstName = request.form["firstName"]
+        lastName = request.form["lastName"]
+        dateOfBirth = request.form["dateOfBirth"] # need to save these details securely for the new account
+        print(firstName)
+        return redirect(url_for('signUpLogins'))
+
+
+@app.route('/signup/logins?', methods=['GET', 'POST'])
+def signUpLogins():
+    if request.method == 'GET':
+        return render_template("signup2.html")
+
+    if request.method == 'POST':
+        firstName = request.form["firstName"]
+        lastName = request.form["lastName"]
+        dateOfBirth = request.form["dateOfBirth"] # need to save these details securely for the new account
+        return render_template("signup2.html", firstName=firstName)
+
+@app.route('/login')
+def login():
+    return render_template("login.html")
+
 
 if __name__ == '__main__':
     app.run(debug=True)

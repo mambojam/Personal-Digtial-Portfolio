@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>My Form - Login</h1>
+<form style="text-align: center;" method="POST" onsubmit="return validateForm()" name="userForm">
+    <h2>User Details:</h2>
+    First Name: <input type="text" name="firstName" id="">
+    <p id="pFirstName" style="color: red;"></p>
+    Last Name: <input type="text" name="lastName" id="">
+    <p id="pLastName" style="color: red;"></p>
+    Date of Birth: <input type="date" name="dateOfBirth" id="">
+    <p id="pDateOfBirth" style="color: red;"></p>
+    <input type="submit" value="Submit">
+    <p id="successMsg" style="color: green;"></p>
+</form>
+
+<p>Already have an account?</p>
+<a href="/signup/logins?">Login</a>
+
+{% endblock %}

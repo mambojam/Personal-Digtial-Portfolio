@@ -113,3 +113,91 @@ function completeTodo() {
     
 }
 
+// Login stuff:
+
+function validateForm() {
+    const firstName = document.forms[ "userForm"][ "firstName"].value;
+    const lastName = document.forms[ "userForm"][ "lastName"].value;
+    const dateOfBirth = document.forms[ "userForm"][ "dateOfBirth"].value;
+
+    if (!validateNameDateOfBirth (firstName, lastName, dateOfBirth)) return false;
+    
+    // params = 'firstName='+ firstName + '&lastName='+ lastName + '&dateOfBirth='+ dateOfBirth ;
+    
+    // Create request
+    let xhttp = new XMLHttpRequest(); // initialize new message
+    xhttp.open("POST", '/signup/name&dob?', true); // Configure message
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+
+    // Don't need any response here as the only AJAX we need is happening before sending the request
+    // // Run response
+    // xhttp.onreadystatechange = function(){
+    //     if (xhttp.readyState === 4 && xhttp.status === 200) {
+    //         // let response = JSON.parse(xhttp.responseText)
+    //         const response = JSON.parse(xhttp.responseText);
+    //         if (response.success) {
+    //             window.location.href = '/signup/logins?';
+    //         }
+    //     } else {
+    //         console.error('Error:', xhttp.statusText);
+    //     }
+    // };
+
+    // Send request
+    xhttp.send();
+}
+    
+
+
+
+function validateNameDateOfBirth( firstName, lastName, dateOfBirth ){
+    document.getElementById("pFirstName").innerHTML = "";
+    document.getElementById("pLastName").innerHTML = "";
+    document.getElementById("pDateOfBirth").innerHTML = "";
+
+
+    // const firstName = document.forms[ "userForm"][ "firstName"].value;
+    if (!validSingleWord(firstName)) {
+        document.getElementById("pFirstName").innerHTML = "You must enter a valid first name";
+        return false;
+    }
+    // const lastName = document.forms[ "userForm"][ "lastName"].value;
+    if (!validSingleWord(lastName)) {
+        document.getElementById("pLastName").innerHTML = "You must enter a valid last name";
+        return false;
+    }
+    // const dateOfBirth = document.forms[ "userForm"][ "dateOfBirth"].value;
+    if ( ageFromYear(dateOfBirth) < 13 || ageFromYear(dateOfBirth) > 150 ) {
+        document.getElementById("pDateOfBirth").innerHTML = "You must be 13 or older to visit this site";
+        return false;
+    }
+    
+    return true;
+    }
+   
+function validSingleWord( s ) {
+    if ( s.length === 0 ) return false; // 0 length
+    if ( !isNaN( s - parseFloat( s ))) return false; // number
+    if ( s.indexOf(" ") != -1 ) return false; // if there's a space
+    return true;
+}
+
+function ageFromYear ( d ) {
+    // yyyy-mm-dd
+    let year = d.split( "-" )[0];
+    let curr = new Date().getFullYear();
+    return curr - year;
+}
+
+
+// // Create request
+// let xhttp = new XMLHttpRequest();
+// xhttp.open("POST", '/UpdateTodo', true);
+// xhttp.setRequestHeader("Content-type", "application/json");
+// // Run response
+// xhttp.onreadystatechange = function(){
+//     if (xhttp.readyState === 4 && xhttp.status === 200) {
+//     console.log(xhttp.responseText);
+   
+// }
