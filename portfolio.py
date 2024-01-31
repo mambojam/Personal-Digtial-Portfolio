@@ -3,7 +3,7 @@ import json
 import sqlite3
 import os
 import copy
-from functions import init_db, get_todos, write_todos
+from functions import init_db, get_todos, add_todo, write_todos
 import gunicorn
 
 app = Flask(__name__)
@@ -106,11 +106,14 @@ def addtodo():
         render_template("todo.html", todos=todos)
     # write new todo to db
     if request.method == 'POST':
+        print("AddTodo message received")
         init_db()
         todo = request.form['todo']
-        todos = get_todos()
-        todos.append(todo)
-        write_todos(todos)
+        print(todo)
+        add_todo(todo)
+        # todos = get_todos()
+        # todos.append(todo)
+        # write_todos(todos)
         return todo
 
 # re-write todos

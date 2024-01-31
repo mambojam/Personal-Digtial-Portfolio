@@ -2,7 +2,7 @@
 // ADD TODO ITEM
 
 function addTodo() {
-
+    console.log("JS addTodo() function called");
     let todo = document.forms["todoForm"]["todo"].value;
     
     // Check if the todo is empty

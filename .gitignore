@@ -2,3 +2,6 @@ myVenv
 __pychache__
 notusing/
 templates/notusing/
+Online_Store_DB.db
+todo.db
+users.db-journal

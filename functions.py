@@ -66,3 +66,21 @@ def write_todos(todos):
 
     conn.commit()
     conn.close()
+
+def add_todo(todo):
+    conn = sqlite3.connect('todo.db')
+    c = conn.cursor()
+
+    c.execute('INSERT INTO todo_list (task_description) VALUES (?)', (todo,))
+
+    conn.commit()
+    conn.close()
+
+def tick_todo(todo):
+    conn = sqlite3.connect('todo.db')
+    c = conn.cursor
+
+    c.execute(f'UPDATE todo_list SET is_completed = 1, WHERE task_description = {todo}' )
+
+    conn.commit()
+    conn.close()
