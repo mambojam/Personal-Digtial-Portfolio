@@ -253,7 +253,7 @@ nav.shop {
     margin-bottom: 10px;
     display: flex;
 }
-  
+
 .input-field {
     width: 100%;
     padding: 10px;
@@ -302,6 +302,9 @@ div.listItem {
     border-width: 80%;
 }
 
+.todo_id {
+  display: none;
+}
 .completeButton {
     border: 0px;
     color: black;

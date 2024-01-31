@@ -14,31 +14,42 @@ function addTodo() {
     params = 'todo='+todo;
 
     let xhttp = new XMLHttpRequest();
-    xhttp.open("POST", '/AddTodo', true);
+    xhttp.open("POST", '/add_todo', true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onreadystatechange = function(){
         if (xhttp.readyState === 4 && xhttp.status === 200) {
         console.log(xhttp.responseText);
+        const todo_id = JSON.parse(xhttp.responseText); // 
         
+    // <div class="listItem">
+    //     <p style="display: none;">{{todo.task_id}}</p>
+    //     <li contenteditable="true" class="todoItem">{{todo.task_description}}</li>
+    //     <!-- Complete todo -->
+    //     <input type="checkbox" class="complete" value="complete" onclick="completeTodo()">
+    // </div>
+
+        
+        // <p style="display: none;">{{todo.task_id}}</p>
+        const idP = document.createElement("p").innerHTML = todo_id;
+        idP.classList.add("todo_id");
+
         // New TODO <li contenteditable="true" class="todoItem">{{todo}}</li>
-        let todoItem = document.createElement("li");
+        const todoItem = document.createElement("li").innerHTML = todo;
         todoItem.contentEditable = true;
         todoItem.classList.add("todoItem");
-        todoItem.innerHTML = todo;
 
-        // CHECKBOX <input type="checkbox" class="complete" value="complete" onclick="completeTodo()">
-        let myCheckbox = document.createElement("input");
+        //     <input type="checkbox" class="complete" value="complete" onclick="completeTodo()">
+        const myCheckbox = document.createElement("input");
         myCheckbox.type = "checkbox";
         myCheckbox.classList.add("complete") ;
-        myCheckbox.addEventListener("click", function () { completeTodo(this); });
+        myCheckbox.addEventListener("click", function () { completeTodo(); });
 
-        
-        // Add new todo and Chkbx into listItem div into todoList div 
-        let todoList = document.getElementById("todoList");
-        let listItem = document.createElement("div");
-        todoList.appendChild(listItem);
-
+        // <div class="listItem">
+        const listItem = document.createElement("div");
         listItem.classList.add("listItem");
+        document.getElementById("todoList").appendChild(listItem);
+
+        listItem.appendChild(idP);
         listItem.appendChild(todoItem);
         listItem.appendChild(myCheckbox);
       
@@ -51,6 +62,34 @@ function addTodo() {
     return false;
     };
 
+function completeTodo() {
+    // find all checked boxes (should only ever be the one that was checked)
+    let completeCheck = document.querySelectorAll('input[class="complete"]:checked');
+    // take this from the list [0] as it is the only item
+    completeCheck = completeCheck[0];
+    // get it's parent element (div.todoItem) 
+    let parent = completeCheck.parentElement;
+    // get the todo item 
+    let todoToComplete = parent.querySelector(".todoItem").textContent;
+    
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("PATCH", '/complete_todo', true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.onreadystatechange = function(){
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+        console.log(xhttp.responseText);
+            // Remove the todo item div
+            parent.remove();
+            // display complete message
+            document.getElementById("msg").innerHTML = "Well done! " + todoToComplete + " was completed.";
+        } else {
+        console.error(xhttp.statusText);
+        }
+    };
+    xhttp.send(JSON.stringify(todoToComplete));
+    return false;
+    };
 
 // UPDATE Todo
 
@@ -92,27 +131,6 @@ function updateTodo() {
     xhttp.send(jsonTodos);
     return false;
     };
-
-
-
-function completeTodo() {
-    // find all checked boxes (should only ever be the one that was checked)
-    let completeCheck = document.querySelectorAll('input[class="complete"]:checked');
-    // take this from the list [0] as it is the only item
-    completeCheck = completeCheck[0];
-    // get it's parent element (div.todoItem) 
-    let parent = completeCheck.parentElement;
-    // get the todo item 
-    let todo = parent.querySelector(".todoItem").textContent;
-    // Remove the todo item div
-    parent.remove();
-    // display complete message
-    let msg = "Well done! " + todo + " was completed.";
-    let p = document.getElementById("msg");
-    p.innerHTML = msg;
-    
-}
-
 // Login stuff:
 
 function validateForm() {

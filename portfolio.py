@@ -3,7 +3,7 @@ import json
 import sqlite3
 import os
 import copy
-from functions import init_db, get_todos, add_todo, write_todos
+import functions as f
 import gunicorn
 
 app = Flask(__name__)
@@ -45,8 +45,8 @@ def projects():
 def project_detail(html_file):
     # todo homepage needs the todos as parameters
     if html_file == "todo.html":
-        init_db()
-        todos = get_todos()
+        f.init_db()
+        todos = f.get_todos()
         return render_template("todo.html", todos=todos)
     return render_template(html_file)
 
@@ -97,31 +97,45 @@ def loadItems():
 
 # Todo list 
 
-@app.route('/AddTodo', methods=['GET', 'POST'])
-def addtodo():
+@app.route('/get_todo', methods=['GET', 'POST', 'PUT'])
+def get_todo():
     # another route to todos homepage
     if request.method == 'GET':
-        init_db()
-        todos = get_todos()
+        f.init_db()
+        todos = f.get_todos()
         render_template("todo.html", todos=todos)
+
+@app.route('/add_todo', methods=['GET', 'POST', 'PUT'])
+def add_todo():
     # write new todo to db
     if request.method == 'POST':
         print("AddTodo message received")
-        init_db()
+        f.init_db()
         todo = request.form['todo']
         print(todo)
-        add_todo(todo)
-        # todos = get_todos()
-        # todos.append(todo)
-        # write_todos(todos)
-        return todo
+        new_todo_id = f.add_todo(todo)
+        return jsonify(new_todo_id)
+
+@app.route('/edit_todo', methods=['GET', 'POST', 'PUT'])
+def edit_todo():
+    if request.method == 'PUT':
+        print("Edit todo message received")
+
+@app.route('/complete_todo', methods=['GET', 'POST', 'PATCH'])
+def complete_todo():
+    if request.method == 'PATCH':
+        todo_to_complete = request.get_json()
+        f.complete_todo(todo_to_complete)
+        return todo_to_complete + " set as completed in db"
+
+
 
 # re-write todos
 @app.route('/UpdateTodo', methods=['POST'])
 def updatetodo():
-    init_db()
+    f.init_db()
     todos = request.json
-    write_todos(todos)
+    f.write_todos(todos)
     return "Todos updated successfully"
 
 # template for pages still in development

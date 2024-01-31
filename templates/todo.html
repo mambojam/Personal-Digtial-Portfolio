@@ -20,7 +20,8 @@
         {% if todos %}
             {% for todo in todos %}
             <div class="listItem">
-                <li contenteditable="true" class="todoItem">{{todo}}</li>
+                <p class="todo_id">{{todo.task_id}}</p>
+                <li contenteditable="true" class="todoItem">{{todo.task_description}}</li>
                 <!-- Complete todo -->
                 <input type="checkbox" class="complete" value="complete" onclick="completeTodo()">
             </div>

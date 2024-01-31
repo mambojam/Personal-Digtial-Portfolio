@@ -46,11 +46,50 @@ def get_todos():
     conn = sqlite3.connect('todo.db')
     c = conn.cursor()
 
-    c.execute('SELECT task_description FROM todo_list')
-    todos = [row[0] for row in c.fetchall()]
-
+    c.execute('SELECT * FROM todo_list')
+    todos = c.fetchall()
+    # Get column names dynamically
+    columns = [column[0] for column in c.description]
+    # Convert the list of tuples to a list of dictionaries
+    todos = [dict(zip(columns, row)) for row in todos]
+    
     conn.close()
     return todos
+
+def add_todo(todo_to_add):
+    conn = sqlite3.connect('todo.db')
+    c = conn.cursor()
+
+    c.execute('INSERT INTO todo_list (task_description) VALUES (?)', (todo_to_add,))
+    # new_todo_id = c.execute(f'SELECT task_id from todo_list WHERE task_description = {todo_to_add}')
+    new_todo_id = c.execute("SELECT last_insert_rowid()").fetchone()[0]  # Get the last inserted ID
+    conn.commit()
+    conn.close()
+    print("New todo added successfully")
+    return new_todo_id
+
+def update_todo(todo_to_update):
+    conn = sqlite3.connect('todo.db')
+    c = conn.cursor
+
+    c.execute(f'UPDATE todo_list SET task_description = {todo_to_update}, WHERE task_id = {todo_id}' )
+
+    conn.commit()
+    conn.close()
+
+def complete_todo(todo):
+    conn = sqlite3.connect('todo.db')
+    c = conn.cursor
+
+    c.execute(f'UPDATE todo_list SET task_completed = 1, WHERE task_id = {todo_id}' )
+
+    conn.commit()
+    conn.close()
+    return "Complete todo function executed"
+
+
+
+
 
 # Write todos to the database
 def write_todos(todos):
@@ -66,24 +105,3 @@ def write_todos(todos):
 
     conn.commit()
     conn.close()
-
-def add_todo(todo):
-    conn = sqlite3.connect('todo.db')
-    c = conn.cursor()
-
-    c.execute('INSERT INTO todo_list (task_description) VALUES (?)', (todo,))
-
-    conn.commit()
-    conn.close()
-
-def tick_todo(todo):
-    conn = sqlite3.connect('todo.db')
-    c = conn.cursor
-
-    c.execute(f'UPDATE todo_list SET is_completed = 1, WHERE task_description = {todo}' )
-
-    conn.commit()
-    conn.close()
-
-
-    
